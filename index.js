@@ -6,7 +6,7 @@ const html = `
 body { font-family: 'Helvetica', sans-serif; box-sizing: border-box; }
 table { border-collapse: collapse; }
 div.caption { display: flex; wrap-text: break-word; padding: 0 0 10px 0; }
-span { color: #009dde; font-size: 12px; }
+span { color: #009dde; font-size: 10px; }
 i.fa-gas-pump { align-self: center; font-size: 35px; padding: 5px; color: #009dde; margin: 0 10px 0 0; }
 i.fa-caret-up {  color: red; margin-left: 2px; }
 i.fa-caret-down { color: green; margin-left: 2px; }
@@ -32,7 +32,7 @@ div.container { width: 25%; display: flex; flex-direction: column; align-items: 
   <i class="fas fa-gas-pump"></i>
   <div>
   <h3> Precios combustibles </h3>
-  <span> 22/07/2018 - 23/07/1018 </span>
+  <span> Semana del 21 al 28 de Julio 2018 </span>
   </div>
 </div>
 <table>
