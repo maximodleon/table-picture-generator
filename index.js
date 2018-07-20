@@ -3,10 +3,11 @@ const puppeteer = require('puppeteer')
 const html = `
 <html>
 <style>
-table { border-collapse: collapse; margin: auto;}
-div.caption { display: flex; wrap-text: break-word; width: 236px; padding: 0 0 10px 0; margin: auto; }
-span { color: #009dde }
-i.fa-gas-pump { align-self: center; font-size: 45px; padding: 5px; color: #009dde; }
+body { font-family: 'Helvetica', sans-serif; box-sizing: border-box; }
+table { border-collapse: collapse; }
+div.caption { display: flex; wrap-text: break-word; padding: 0 0 10px 0; }
+span { color: #009dde; font-size: 12px; }
+i.fa-gas-pump { align-self: center; font-size: 35px; padding: 5px; color: #009dde; margin: 0 10px 0 0; }
 i.fa-caret-up {  color: red; margin-left: 2px; }
 i.fa-caret-down { color: green; margin-left: 2px; }
 i.fa-equals { color: yellow; margin-left: 2px; }
@@ -14,15 +15,15 @@ th{ background-color: #ededed; padding: 4px 6px; text-align: left; vertical-alig
 td  {
   background-color: #009dde;
   color: #fff;
-  padding-right: 10px;
   padding: 0 10px 0 10px;
   text-align: left;
   border: 1px solid #fff;
   font-size: 15px;
+  font-weight: bold;
 }
 
 h3 { color: #009dde; text-transform: uppercase; line-height: 1.2rem; font-size: 13px; margin-bottom: 4px;}
-div.container { width: 237px; }
+div.container { width: 25%; display: flex; flex-direction: column; align-items: center; }
 </style>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 <body>
@@ -49,6 +50,7 @@ div.container { width: 237px; }
 const generatePicture = async (selector, padding = 0) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+  page.setViewport({ width: 1000, height: 600, deviceScaleFactor: 2 }) // hit desktop breakpoint
   await page.goto(`data:text/html,${html}`, { waitUntil: 'networkidle0' })
   const rect = await page.evaluate(selector => {
     const element = document.querySelector(selector)      
@@ -58,6 +60,7 @@ const generatePicture = async (selector, padding = 0) => {
 
   await page.screenshot({ 
       path: 'example.png', 
+      ommitBackground: true,
       clip: {
        x: rect.left - padding,
        y: rect.top - padding,
@@ -69,4 +72,4 @@ const generatePicture = async (selector, padding = 0) => {
 }
 
 
-generatePicture('div', 3)
+generatePicture('div', 0)
