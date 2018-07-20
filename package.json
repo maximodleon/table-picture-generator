@@ -1,0 +1,14 @@
+{
+  "name": "table-picture-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Máximo De León <maximodleon@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "1.6.0"
+  }
+}
