@@ -51,7 +51,7 @@ const generatePicture = async (browser, html, selector, padding = 0) => {
   // const browser = await puppeteer.launch();
   const page = await browser.newPage();
   page.setViewport({ width: 1000, height: 600, deviceScaleFactor: 2 }) // hit desktop breakpoint
-  await page.goto(`data:text/html,${html}`, { waitUntil: 'networkidle0' })
+  await page.goto(`data:text/html;charset=UTF-8,${html}`, { waitUntil: 'networkidle0' })
   const rect = await page.evaluate(selector => {
     const element = document.querySelector(selector)      
     const{ x, y, width, height } = element.getBoundingClientRect()
@@ -79,7 +79,8 @@ const getHTML = (body, style) => {
 body { font-family: 'Helvetica', sans-serif; box-sizing: border-box; }
 table { border-collapse: collapse; }
 div.caption { display: flex; wrap-text: break-word; padding: 0 0 10px 0; }
-span { color: #009dde; font-size: 10px; }
+div.header { height: 40px; display: flex; flex-direction: column; justify-content: center; }
+span { color: #009dde; font-size: 13px; }
 i.fa-gas-pump { align-self: center; align-self: flex-start; font-size: 45px; padding: 5px; color: #009dde; margin: 0 10px 0 0; }
 i.fa-caret-up {  color: red; margin-left: 2px; }
 i.fa-caret-down { color: green; margin-left: 2px; }
@@ -95,10 +96,12 @@ td  {
   font-weight: bold;
 }
 
-h3 { color: #009dde; text-transform: uppercase; line-height: 1.2rem; font-size: 13px; margin-bottom: 4px;}
-div.container { width: 36%; display: flex; flex-direction: column; align-items: center; }
+h3 { color: #009dde; text-transform: uppercase; line-height: 1.2rem; font-size: 20px; margin-bottom: 4px;}
+div.container { width: 36%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 </style>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+<header>
+</header>
 <body>
 ${body}
 </body>
@@ -114,7 +117,7 @@ const getTable = async () => {
    <div class="container">
 <div class="caption">
   <i class="fas fa-gas-pump"></i>
-  <div>
+  <div class="header">
   <h3> Precios combustibles </h3>
   <span> Semana del 21 al 28 de Julio 2018 </span>
   </div>
